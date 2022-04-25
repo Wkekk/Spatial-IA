@@ -43,3 +43,15 @@ class Graph :
 
 g1 = Graph()
 print(g1.calcul_matrice_cout_od())
+
+class Route :
+	"""class describing the road followed to go through every place on the graph once and back to the beginning"""
+	ordre = []
+
+	def calcul_distance_route(self) : 
+		dt = 0
+		for i in range(len(self.ordre) - 1) :
+			dt += self.ordre[i].calcul_distance(self.ordre[i+1])
+		return dt
+
+class Affichage :
