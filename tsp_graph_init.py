@@ -11,6 +11,7 @@ class Lieu :
 	def __init__(self, x, y) :
 		self.x = x
 		self.y = y
+		self.phero = 0.1
 
 	def calcul_distance(self, l2) :
 		return math.sqrt((self.x - l2.x)**2 + (self.y - l2.y)**2)
@@ -92,7 +93,7 @@ class Affichage :
 				cls.canva.create_oval(v[0]-12, v[1]-12 , v[0]+12, v[1]+12, fill="#CDC9C9")
 			cls.canva.create_text(v[0], v[1], text=str(k))
     
-canv = Affichage()
-canv.crea_fenetre()
+#canv = Affichage()
+#canv.crea_fenetre()
 
 
