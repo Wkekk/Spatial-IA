@@ -46,7 +46,7 @@ print(g1.calcul_matrice_cout_od())
 
 class Route :
 	"""class describing the road followed to go through every place on the graph once and back to the beginning"""
-	ordre = []
+	ordre = [0]
 
 	def calcul_distance_route(self) : 
 		dt = 0
@@ -55,3 +55,44 @@ class Route :
 		return dt
 
 class Affichage :
+	LARGEUR = 800
+	HAUTEUR = 600
+	@classmethod
+	def crea_fenetre(cls):
+		cls.root = tk.Tk()
+		cls.root.title("Challenge Spatial - Maina, Nathan, Hervé, Quentin")
+		cls.root.geometry("1200x700")
+		cls.root.bind("<Escape>", lambda x: cls.root.destroy())
+		cls.canva = tk.Canvas(cls.root, scrollregion=(0,0,500,500), height=cls.HAUTEUR, width=cls.LARGEUR)  
+		cls.canva.pack(expand=True)
+		cls.lab_text = tk.StringVar()
+		cls.lab_text.set("Génération n°0")
+		cls.lab = tk.Label(cls.root, textvariable=cls.lab_text, fg="#715ec1")
+		cls.lab.pack(expand="True")
+		tk.mainloop()
+
+	@classmethod
+	def create_line(cls, points, routes, counter, top_score):
+		cls.canva.delete("all")
+		cls.lab_text.set(f"Génération n°{counter}\nTop Score: {top_score[-1]['score']} (-{round(top_score[-2]['score'] - top_score[-1]['score'], 3)}) trouvé en {top_score[-1]['iter']} (+ {top_score[-1]['iter'] - top_score[-2]['iter']}) itérations.")
+		cnt = 0
+		for route in routes:
+			if cnt > 0:
+				second_layer = cls.canva.create_line([points[i] for i in route["route"]], dash=(5, 2), fill="#CDC9C9")
+				cls.canva.tag_lower(second_layer)
+				cnt += 1
+			else:
+				first_layer = cls.canva.create_line([points[i] for i in route["route"]], fill="blue")
+				cls.canva.tag_raise(first_layer)
+				cnt += 1
+		for k, v in points.items():
+			if k == 0:
+				cls.canva.create_oval(v[0]-12, v[1]-12 , v[0]+12, v[1]+12, fill="red")
+			else:
+				cls.canva.create_oval(v[0]-12, v[1]-12 , v[0]+12, v[1]+12, fill="#CDC9C9")
+			cls.canva.create_text(v[0], v[1], text=str(k))
+    
+canv = Affichage()
+canv.crea_fenetre()
+
+
