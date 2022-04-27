@@ -26,6 +26,8 @@ class Graph :
 	LARGEUR = 800
 	HAUTEUR = 600
 	NB_LIEU = 10
+	mat_phero = np.ones(graph.NB_LIEU, graph.NB_LIEU)
+
 
 	def __init__(self) :
 		self.liste_lieux = []
@@ -33,6 +35,7 @@ class Graph :
 			x = random.randint(0, self.LARGEUR)
 			y = random.randint(0, self.HAUTEUR)
 			self.liste_lieux.append(Lieu(x, y))
+
 
 	def calcul_matrice_cout_od(self) :
 		mat = np.zeros((self.NB_LIEU, self.NB_LIEU))
