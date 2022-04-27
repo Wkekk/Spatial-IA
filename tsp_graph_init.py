@@ -26,7 +26,7 @@ class Graph :
 	LARGEUR = 800
 	HAUTEUR = 600
 	NB_LIEU = 10
-	mat_phero = np.ones(graph.NB_LIEU, graph.NB_LIEU)
+	mat_phero = np.ones((NB_LIEU, NB_LIEU))
 
 
 	def __init__(self) :
